@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban Board</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="kanban.css">
+
+</head>
+
+<body>
+
+    <h1 class="text-center text-5xl font-bold mt-5">
+        KANBAN BOARD
+    </h1>
+
+    <div id="task-modal">
+
+        <div class="flex items-center justify-center mt-10 gap-3">
+            <input type="text" placeholder="Search Task" class="border w-80 h-10 rounded-lg px-3">
+            <button id="open-modal"
+                class="bg-blue-700 text-white font-medium rounded-lg px-5 py-2 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
+                Add Task
+            </button>
+        </div>
+
+        <!-- Modal -->
+        <div id="crud-modal" tabindex="-1" aria-hidden="true"
+            class="hidden fixed inset-0 z-50 flex items-center justify-center w-full h-full bg-gray-800 bg-opacity-50">
+            <div class="bg-white rounded-lg shadow-lg w-96 p-6">
+                <!-- Modal Header -->
+                <div class="flex justify-between border-b pb-3">
+                    <h3 class="text-lg font-semibold">Create New Task</h3>
+                    <button id="close-modal" class="text-gray-600 hover:text-gray-900">
+                        ✖
+                    </button>
+                </div>
+                <!-- Modal Body -->
+                <form id="task-form" class="mt-4">
+                    <div>
+                        <label class="block text-sm font-medium">Task Name</label>
+                        <input type="text" id="name" placeholder="Enter task name"
+                            class="border w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500">
+                    </div>
+
+                    <div class="mt-3">
+                        <label class="block text-sm font-medium">Description</label>
+                        <textarea id="description" rows="3" placeholder="Enter task details"
+                            class="border w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
+
+                    <div class="mt-3">
+                        <label class="block text-sm font-medium">Category</label>
+                        <select id="category"
+                            class="border w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <option value="todo">To Do</option>
+                            <option value="inprogress">In Progress</option>
+                            <option value="done">Done</option>
+                        </select>
+                    </div>
+
+                    <div class="mt-4">
+                        <button onclick="saveTasks()" id="close-modal" type="submit"
+                            class="w-full bg-blue-700 text-white font-medium rounded-lg px-4 py-2 hover:bg-blue-800">
+                            Add Task
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="flex gap-4 justify-center mt-8">
+
+        <div class="border border-black rounded-lg w-60 h-96 bg-blue-100  overflow-y-auto no-scrollbar relative"
+            id="todo">
+            <h2 class="text-center font-bold bg-blue-300 h-10 p-2 rounded-t-lg w-[14.9rem] fixed ">To Do</h2>
+            <div class="p-2 mt-10" draggable="true" id="todo-tasks"></div>
+        </div>
+
+        <div class="border border-black rounded-lg w-60 h-96 bg-orange-100 overflow-y-auto relative no-scrollbar"
+            id="inprogress">
+            <h2 class="text-center font-bold bg-orange-300 p-2 h-10 rounded-t-lg w-[14.9rem] fixed">In Progress</h2>
+            <div class="p-2 mt-10" draggable="true" id="inprogress-tasks"></div>
+        </div>
+
+        <div class="border border-black rounded-lg w-60 h-96 bg-green-100 overflow-y-auto no-scrollbar relative"
+            id="done">
+            <h2 class="text-center font-bold bg-green-300 h-10 p-2 rounded-t-lg w-[14.9rem] fixed">Done</h2>
+            <div class="p-2 mt-10" draggable="true" id="done-tasks"></div>
+        </div>
+    </div>
+
+    <script src="kanban.js"></script>
+    <script src="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.bundle.js"></script>
+
+</body>
+
+</html>
